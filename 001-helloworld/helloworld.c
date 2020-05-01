@@ -5,7 +5,7 @@ MODULE_AUTHOR("Cooper Van Kampen");
 MODULE_LICENSE("GPL v2");
 MODULE_DESCRIPTION("Basic hello world module");
 
-static __init lkm_init(void) {
+static int __init lkm_init(void) {
 	pr_info("Hello to the cruel world of kernel programming\n");
 	return 0;
 }
