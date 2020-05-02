@@ -5,6 +5,8 @@ MODULE_AUTHOR("Cooper Van Kampen");
 MODULE_LICENSE("GPL v2");
 MODULE_DESCRIPTION("Basic hello world module");
 
+#define pr_fmt(fmt)	KBUILD_MODNAME " -> %s:%d -> " fmt,__func__,__LINE__
+
 static int __init lkm_init(void) {
 	pr_info("Hello to the cruel world of kernel programming\n");
 	return 0;
