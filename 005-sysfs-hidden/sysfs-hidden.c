@@ -8,11 +8,11 @@ MODULE_DESCRIPTION("Basic hello world module");
 
 // Arguments
 static int counter;
-module_param(counter, int, 0);
+module_param(counter, int, S_IWUSR | S_IRUGO);
 MODULE_PARM_DESC(counter, "Simple int based counter");
 
 static char *message = NULL;
-module_param(message, charp, 0);
+module_param(message, charp, S_IWUSR | S_IRUGO);
 MODULE_PARM_DESC(message, "A message from user space");
 
 // "Main"
