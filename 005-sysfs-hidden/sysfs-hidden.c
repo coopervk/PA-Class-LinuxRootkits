@@ -24,6 +24,7 @@ static int __init lkm_init(void) {
 
 // Exit routine
 static void __exit lkm_exit(void) {
+	pr_info("Arguments on exit: counter = %d, message = %s\n", counter, message);
 	pr_info("Exiting hellwold lkm\n");
 }
 
