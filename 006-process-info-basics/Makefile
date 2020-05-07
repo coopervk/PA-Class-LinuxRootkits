@@ -1,4 +1,4 @@
-obj-m += sysfs-module-args.o
+obj-m += pinfo.o
 KERNEL_ROOT = /home/rootkid/Downloads/linux-4.19.119/ 
 
 modules:
