@@ -27,7 +27,7 @@ static int __init lkm_init(void) {
 		pr_info("--------------\n");
 		pr_info("Threads details\n");
 		
-		for_each_thread(target_task, process_thread)
+		for_each_thread(target_task, process_thread) // Uses RCU doubly linked list macro in signal.h
 			print_task_pid_details(process_thread);
 		pr_info("--------------");
 	} else {
