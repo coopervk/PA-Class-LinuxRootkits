@@ -1,4 +1,5 @@
 #include <linux/sched.h>
+#include <linux/sched/signal.h>
 #include <linux/pid.h>
 #include <linux/cred.h>
 
