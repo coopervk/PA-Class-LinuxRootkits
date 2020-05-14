@@ -24,12 +24,13 @@ static int __init lkm_init(void) {
 
 		// Thread details for PID
 		pr_info("Number of threads: %d\n", get_task_thread_count(target_task));
-		pr_info("--------------\n");
 		pr_info("Threads details\n");
-		
 		for_each_thread(target_task, process_thread) // Uses RCU doubly linked list macro in signal.h
 			print_task_pid_details(process_thread);
-		pr_info("--------------\n");
+
+		// Path details
+		print_task_binary_name(target_task);
+		print_task_root_path_pwd(target_task);
 	} else {
 		pr_info("Received invalid uspace PID: %d\n", process_id);
 		return -EINVAL;
