@@ -93,3 +93,53 @@ static inline int print_task_root_path_pwd(struct task_struct *task) {
 
 	return SUCCESS;
 }
+
+static inline int print_address_family(struct socket *sock) {
+	PTR_NULL_CHECK(sock);
+
+	switch(sock->ops->family) {
+		case AF_UNIX:	pr_info("Address family: AF_UNIX/AF_LOCAL\n"); break;
+		case AF_INET:	pr_info("Address family: AF_INET\n"); break;
+		case AF_INET6:	pr_info("Address family: AF_INET6\n"); break;
+		case AF_PACKET:	pr_info("Address family: AF_PACKET\n"); break;
+		default:	pr_info("Address family: (%d)\n", sock->ops->family);
+	}
+
+	return SUCCESS;
+}
+
+static inline int print_sock_type(short s_type) {
+	switch(s_type) {
+		case SOCK_STREAM:	pr_info("Type: SOCK_STREAM\n"); break;
+		case SOCK_DGRAM:	pr_info("Type: SOCK_DGRAM\n"); break;
+		case SOCK_RAW:		pr_info("Type: SOCK_RAW\n"); break;
+		case SOCK_RDM:		pr_info("Type: SOCK_RDM\n"); break;
+		case SOCK_SEQPACKET:	pr_info("Type: SOCK_SEQPACKET\n"); break;
+		case SOCK_DCCP:		pr_info("Type: SOCK_DCCP\n"); break;
+		case SOCK_PACKET:	pr_info("Type: SOCK_PACKET\n"); break;
+		default:		pr_info("Type: Unknown\n");
+	}
+
+	return SUCCESS;
+}
+
+static inline int print_file_descriptor_details(const void *arg, struct file *f, unsigned fd_value) {
+	char *binary_path, *temp_path;
+	struct socket *sock_data;
+	int err;
+
+	temp_path = (char *) kmalloc(PATH_MAX, GFP_KERNEL);
+	binary_path = d_path(&f->f_path, temp_path, PATH_MAX);
+	pr_info("File descriptor: %d\n", fd_value);
+	pr_info("File path: %s\n", binary_path);
+	kfree(temp_path);
+
+	sock_data = sock_from_file(f, &err);
+	if(sock_data) {
+		print_sock_type(sock_data->type);
+		print_address_family(sock_data);
+	}
+
+	return SUCCESS;
+}
+
