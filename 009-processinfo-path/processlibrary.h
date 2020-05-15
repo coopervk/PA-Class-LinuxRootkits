@@ -102,7 +102,7 @@ static inline int print_address_family(struct socket *sock) {
 		case AF_INET:	pr_info("Address family: AF_INET\n"); break;
 		case AF_INET6:	pr_info("Address family: AF_INET6\n"); break;
 		case AF_PACKET:	pr_info("Address family: AF_PACKET\n"); break;
-		default:	pr_info("Address family: (%d)\n", sock->ops->family);
+		default:	pr_info("Address family: (%d)\n", sock->ops->family); // Check socket.h
 	}
 
 	return SUCCESS;
