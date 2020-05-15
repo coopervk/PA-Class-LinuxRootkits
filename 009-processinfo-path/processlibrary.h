@@ -143,3 +143,9 @@ static inline int print_file_descriptor_details(const void *arg, struct file *f,
 	return SUCCESS;
 }
 
+static inline int print_list_of_open_files(struct task_struct* task) {
+	const void* p;
+	iterate_fd(task->files, 0, print_file_descriptor_details, p);
+
+	return SUCCESS;
+}
