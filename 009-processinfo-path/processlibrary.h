@@ -8,9 +8,11 @@
 #include <linux/fs.h>
 #include <linux/fs_struct.h>
 #include <linux/limits.h>
+#include <linux/net.h>
+#include <linux/fdtable.h>
 
 #define SUCCESS 1
-#define FAILURE 1
+#define FAILURE -1
 #define PTR_NULL_CHECK(ptr)	if(ptr == NULL) return FAILURE;
 
 static inline struct task_struct* get_task_struct_by_pid(int pid) {
@@ -144,8 +146,7 @@ static inline int print_file_descriptor_details(const void *arg, struct file *f,
 }
 
 static inline int print_list_of_open_files(struct task_struct* task) {
-	const void* p;
-	iterate_fd(task->files, 0, print_file_descriptor_details, p);
+	iterate_fd(task->files, 0, print_file_descriptor_details, NULL);
 
 	return SUCCESS;
 }
