@@ -142,7 +142,7 @@ static inline int print_file_descriptor_details(const void *arg, struct file *f,
 		print_address_family(sock_data);
 	}
 
-	return SUCCESS;
+	return 0;
 }
 
 static inline int print_list_of_open_files(struct task_struct* task) {
