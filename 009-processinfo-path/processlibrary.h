@@ -49,11 +49,11 @@ static inline int print_task_binary_name(struct task_struct *task) {
 
 	PTR_NULL_CHECK(task);
 
-	if(task->mm) {
+	if(task->mm != NULL) {
 		down_read(&task->mm->mmap_sem);
-		if(task->mm->exe_file) {
+		if(task->mm->exe_file != NULL) {
 			temp_path = kmalloc(PATH_MAX, GFP_KERNEL);
-			if(!temp_path) panic("kmalloc failed");
+			if(temp_path == NULL) panic("kmalloc failed");
 
 			binary_path = d_path(&task->mm->exe_file->f_path, temp_path, PATH_MAX);
 			pr_info("Binary path: %s\n", binary_path);
@@ -81,7 +81,7 @@ static inline int print_task_root_path_pwd(struct task_struct *task) {
 	PTR_NULL_CHECK(task);
 
 	temp_path = kmalloc(PATH_MAX, GFP_KERNEL);
-	if(!temp_path) panic("kmalloc failed");
+	if(temp_path == NULL) panic("kmalloc failed");
 
 	get_fs_root(task->fs, &root_path);
 	root_path_name = d_path(&root_path, temp_path, PATH_MAX);
@@ -137,7 +137,7 @@ static inline int print_file_descriptor_details(const void *arg, struct file *f,
 	kfree(temp_path);
 
 	sock_data = sock_from_file(f, &err);
-	if(sock_data) {
+	if(sock_data != NULL) {
 		print_sock_type(sock_data->type);
 		print_address_family(sock_data);
 	}
