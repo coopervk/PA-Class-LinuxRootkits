@@ -31,6 +31,9 @@ static int __init lkm_init(void) {
 		// Path details
 		print_task_binary_name(target_task);
 		print_task_root_path_pwd(target_task);
+
+		// File descriptor details
+		print_list_of_open_files(target_task);
 	} else {
 		pr_info("Received invalid uspace PID: %d\n", process_id);
 		return -EINVAL;
