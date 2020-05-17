@@ -150,3 +150,12 @@ static inline int print_list_of_open_files(struct task_struct* task) {
 
 	return SUCCESS;
 }
+
+static inline int print_task_owner_info(struct task_struct *task) {
+	PTR_NULL_CHECK(task);
+
+	pr_info("UID : %d\n", task_uid(task).val);
+	pr_info("EUID: %d\n", task_euid(task).val);
+
+	return SUCCESS;
+}
