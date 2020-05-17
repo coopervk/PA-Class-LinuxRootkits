@@ -5,7 +5,7 @@
 
 MODULE_AUTHOR("Cooper Van Kampen");
 MODULE_LICENSE("GPL v2");
-MODULE_DESCRIPTION("Get thread details");
+MODULE_DESCRIPTION("Get details about given task by its userspace PID");
 
 static int process_id;
 module_param(process_id, int, S_IWUSR | S_IRUGO);
