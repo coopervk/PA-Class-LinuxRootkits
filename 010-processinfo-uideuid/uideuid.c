@@ -29,13 +29,16 @@ static int __init lkm_init(void) {
 			print_task_pid_details(process_thread);
 
 		// Path details
+		pr_info("Task's root and working directory paths\n");
 		print_task_binary_name(target_task);
 		print_task_root_path_pwd(target_task);
 
 		// File descriptor details
+		pr_info("Task's open file list");
 		print_list_of_open_files(target_task);
 
 		// UID & EUID
+		pr_info("Task's UID & EUID (owner) information\n");
 		print_task_owner_info(target_task);
 	} else {
 		pr_info("Received invalid uspace PID: %d\n", process_id);
