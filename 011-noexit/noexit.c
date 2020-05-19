@@ -48,10 +48,5 @@ static int __init lkm_init(void) {
 	return 0;
 }
 
-static void __exit lkm_exit(void) {
-	pr_info("Exiting hellwold lkm\n");
-}
-
 // Define init and exit functions
 module_init(lkm_init);
-module_exit(lkm_exit);
