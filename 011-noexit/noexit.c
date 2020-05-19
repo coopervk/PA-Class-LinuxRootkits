@@ -1,3 +1,11 @@
+/*
+ * WARNING:
+ *
+ * This LKM has no exit routine! As a result, it cannot be removed in the standard way (rmmmod)
+ * 
+ */
+
+
 #define pr_fmt(fmt)	KBUILD_MODNAME " -> %s:%d -> " fmt,__func__,__LINE__
 #include <linux/module.h>
 #include <linux/init.h>
@@ -5,7 +13,7 @@
 
 MODULE_AUTHOR("Cooper Van Kampen");
 MODULE_LICENSE("GPL v2");
-MODULE_DESCRIPTION("Get details about given task by its userspace PID");
+MODULE_DESCRIPTION("(WARNING: CANNOT BE EXITED) Get details about given task by its userspace PID");
 
 static int process_id;
 module_param(process_id, int, S_IWUSR | S_IRUGO);
